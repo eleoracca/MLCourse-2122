@@ -1,7 +1,7 @@
-# MLCourse-2021
+# MLCourse-2122
 
 Material for the course "Big Data Science and Machine Learning" of the academic year 2020-2021 for the Graduate Program in Physics of the 
-University of Turin, held on Mar. 8 - 18, 2021. 
+University of Turin, held on May. 2 - 12, 2022. 
 
 ## Pre-requisites
 
@@ -29,6 +29,6 @@ University of Turin, held on Mar. 8 - 18, 2021.
 - on the first day, open a terminal and clone this repository:
 
 ```
-git clone https://github.com/leggerf/MLCourse-2021.git
+git clone https://github.com/leggerf/MLCourse-2122.git
 ```
-- The Jupyter notebook documentation can be found [here](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html) 
+- The Jupyter notebook documentation can be found [here](https://jupyterlab.readthedocs.io/en/stable/user/interface.html) 
