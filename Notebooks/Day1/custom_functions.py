@@ -23,7 +23,6 @@ def plotSignalvsBg(df, variable):
     return
 
 def plotSignalvsBgWithPrediction(df, pred_full, variable):
-
     
     ## hist is a tuple containing bins and counts foreach bin
     hist_signal, hist_bkg = compute_hist(data=df, feature=variable, target='label', n_bins=50, x_lim=[0,3])
@@ -56,6 +55,47 @@ def plotSignalvsBgWithPrediction(df, pred_full, variable):
     plt.show()
     f.savefig("SignalvsBackgroundPred.pdf", bbox_inches='tight')
     
+    return
+
+# for Keras
+def plotSignalvsBgWithPrediction2(x_test, y_test, y_pred, variable):
+    
+    def isSignal(x, y):
+        if (y>=0.5):
+            return x
+        else: 
+            return -1.
+    
+    def isBackground(x, y):
+        if (y<0.5):
+            return x
+        else: 
+            return -1.
+    
+    isSignalNP = np.vectorize(isSignal)
+    isBackgroundNP = np.vectorize(isBackground)
+
+    x_signal = isSignalNP(x_test, y_test)
+    x_background = isBackgroundNP(x_test, y_test)
+    x_signal_pred = isSignalNP(x_test, y_pred[:,0])
+    x_background_pred = isBackgroundNP(x_test, y_pred[:,0])
+
+    f, ax = plt.subplots()
+    plt.hist(x_signal, bins = 100, range=[0, 3.5], alpha=0.5, label='signal') 
+    plt.hist(x_background, bins = 100, range=[0, 3.5], alpha=0.5, label='background') 
+    plt.hist(x_signal_pred, bins = 100, range=[0, 3.5], label='predicted signal', histtype='step',
+        linestyle='--', color='green', linewidth=2) 
+    plt.hist(x_background_pred, bins = 100, range=[0, 3.5], label='predicted background', histtype='step',
+        linestyle='--', color='red', linewidth=2) 
+    
+    plt.title("histogram") 
+    ax.set_xlabel(variable)
+    ax.set_ylabel('counts')
+    ax.legend()
+    ax.set_title("Distribution of "+variable)
+    plt.show()
+    f.savefig("SignalvsBackgroundPred.pdf", bbox_inches='tight')
+
     return
 
 #for signal vs background plot
@@ -138,7 +178,7 @@ def prepareData(df, split):
 # Plot variable (loss, acc) vs. epoch
 def plotVsEpoch(history, variable):
 
-    get_ipython().run_line_magic('matplotlib', 'notebook')
+    #get_ipython().run_line_magic('matplotlib', 'notebook')
     
     plt.figure()
     plt.plot(history.history[variable], label='train')
@@ -150,7 +190,7 @@ def plotVsEpoch(history, variable):
     
     return
 
-# Draw roc curve
+# Draw roc curve for Keras
 def drawROC2(y_true, y_pred):
 
     from sklearn.metrics import auc, roc_curve
@@ -158,7 +198,7 @@ def drawROC2(y_true, y_pred):
     auc = auc(fpr, tpr)
 
     f = plt.figure()
-    plt.plot([0,1], [0,1], 'k--', color='orange')
+    plt.plot([0,1], [0,1], '--', color='orange')
     plt.plot(fpr, tpr, label='auc = {:.3f}'.format(auc))
     plt.xlabel('False positive rate')
     plt.ylabel('True positive rate')
