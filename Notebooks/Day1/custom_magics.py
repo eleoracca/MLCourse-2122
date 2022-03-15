@@ -102,8 +102,8 @@ def sc_bigDL(num_workers):
     sconf.set('spark.kubernetes.pyspark.pythonVersion', "3")
     sconf.set("spark.driver.port", 34782)
     sconf.set("spark.executorEnv.HADOOP_USER_NAME", "jovyan")
-    sconf.set("spark.driver.memory", "8g")
-    sconf.set("spark.executor.memory", "8g")
+    sconf.set("spark.driver.memory", "2g")
+    sconf.set("spark.executor.memory", "6g")
     #sconf.set("spark.kubernetes.container.image.pullPolicy", "Always")
 
     # to land on particular nodes
