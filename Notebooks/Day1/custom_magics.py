@@ -115,8 +115,8 @@ def sc_bigDL(num_workers):
     sconf.set("spark.executor.extraClassPath","/opt/conda/lib/python3.9/site-packages/bigdl/share/dllib/lib/bigdl-dllib-spark_3.1.2-2.0.0-jar-with-dependencies.jar")
     sconf.set("spark.executor.cores", "1")
     sconf.set("spark.cores.max", "1")
-    sconf.set("spark.executor.memoryOverhead", "512m")  
-    sconf.set("spark.driver.memoryOverhead", "512m")    
+#    sconf.set("spark.executor.memoryOverhead", "512m")  
+#    sconf.set("spark.driver.memoryOverhead", "512m")    
         
     sconf.set("spark.shuffle.reduceLocality.enabled", "false")
     sconf.set("spark.shuffle.blockTransferService", "nio")
