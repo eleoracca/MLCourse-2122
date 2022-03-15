@@ -54,12 +54,17 @@ def sc(num_workers):
     sconf.set("spark.executorEnv.HADOOP_USER_NAME", "jovyan")
     sconf.set("spark.driver.memory", "10g")
     sconf.set("spark.executor.memory", "10g")
-    sconf.set("spark.executor.cores", "5") # magic number to achieve maximum HDFS throughtput   
+    sconf.set("spark.executor.cores", "5") # magic number to achieve maximum HDFS throughtput 
+    sconf.set("spark.kubernetes.container.image.pullPolicy", "Always")
+    
+    # for spark-tensorflow?
+    #    sconf.set("spark.task.cpus", num_workers)
+    #    sconf.set("spark.dynamicAllocation.enabled", "false")
 
     # to land on particular nodes
     #sconf.set("spark.kubernetes.node.selector.kubernetes.io/hostname","t2-mlwn-02.to.infn.it")    
-    #sconf.set("spark.kubernetes.node.selector.cluster", "t2-mlwn")
-    
+    sconf.set("spark.kubernetes.node.selector.cluster", "yoga-priv")
+
     context=SparkContext(conf=sconf)   
     context.setLogLevel("DEBUG")
     context._conf.getAll()
@@ -67,7 +72,6 @@ def sc(num_workers):
     return context
 
 # Define the Spark context for bigDL
-# FIX THIS 3.7 vs 3.9 !!
 
 @register_line_magic
 def sc_bigDL(num_workers):
@@ -85,26 +89,30 @@ def sc_bigDL(num_workers):
     sconf=SparkConf()
     # add sparkmonitor extension
     sconf.set("spark.extraListeners", "sparkmonitor.listener.JupyterSparkMonitorListener")
-    #add jars for BigDL and analytics zoo
-    sconf.set("spark.driver.extraClassPath","/opt/conda/lib/python3.9/site-packages/sparkmonitor/listener_2.12.jar:/opt/conda/lib/python3.7/site-packages/bigdl/share/lib/bigdl-0.9.0-jar-with-dependencies.jar:/opt/conda/lib/python3.7/site-packages/zoo/share/lib/analytics-zoo-bigdl_0.9.1-spark_2.4.3-0.6.0-jar-with-dependencies.jar")
-    sconf.set("spark.jars","/opt/conda/lib/python3.7/site-packages/bigdl/share/lib/bigdl-0.9.0-jar-with-dependencies.jar,/opt/conda/lib/python3.7/site-packages/zoo/share/lib/analytics-zoo-bigdl_0.9.1-spark_2.4.3-0.6.0-jar-with-dependencies.jar")
-    sconf.set("spark.executor.extraClassPath","/opt/conda/lib/python3.7/site-packages/bigdl/share/lib/bigdl-0.9.0-jar-with-dependencies.jar:/opt/conda/lib/python3.7/site-packages/zoo/share/lib/analytics-zoo-bigdl_0.9.1-spark_2.4.3-0.6.0-jar-with-dependencies.jar")
+    sconf.set("spark.driver.extraClassPath","/opt/conda/lib/python3.9/site-packages/sparkmonitor/listener_2.12.jar")
     sconf.set("spark.master", "k8s://https://192.168.2.39:6443")
     sconf.set("spark.name", "spark-"+username)
     sconf.set("spark.submit.deployMode", "client")
     sconf.set("spark.kubernetes.namespace", username)
     sconf.set("spark.executor.instances", num_workers)
-    sconf.set("spark.kubernetes.container.image", "sparkpy:3.2.1")
+    sconf.set("spark.kubernetes.container.image", "svallero/sparkpy:3.2.1")
     sconf.set("spark.driver.host", "jupyter-"+username+".jhub.svc.cluster.local")
     #sconf.set("spark.driver.host", "192.168.149.9")
     sconf.set('spark.app.name', "jupyter-"+username)
     sconf.set('spark.kubernetes.pyspark.pythonVersion', "3")
     sconf.set("spark.driver.port", 34782)
     sconf.set("spark.executorEnv.HADOOP_USER_NAME", "jovyan")
-    sconf.set("spark.driver.memory", "2g")
-    sconf.set("spark.executor.memory", "2g")   
-    
-    #for bigDL, check these settings
+    sconf.set("spark.driver.memory", "10g")
+    sconf.set("spark.executor.memory", "10g")
+    sconf.set("spark.kubernetes.container.image.pullPolicy", "Always")
+
+    # to land on particular nodes
+    #sconf.set("spark.kubernetes.node.selector.kubernetes.io/hostname","t2-mlwn-02.to.infn.it")    
+    sconf.set("spark.kubernetes.node.selector.cluster", "yoga-priv")
+ 
+    #bigDL
+    sconf.set("spark.jars","/opt/conda/lib/python3.9/site-packages/bigdl/share/dllib/lib/bigdl-dllib-spark_3.1.2-2.0.0-jar-with-dependencies.jar")
+    sconf.set("spark.executor.extraClassPath","/opt/conda/lib/python3.9/site-packages/bigdl/share/dllib/lib/bigdl-dllib-spark_3.1.2-2.0.0-jar-with-dependencies.jar")
     sconf.set("spark.executor.cores", "1")
     sconf.set("spark.cores.max", "1")
     sconf.set("spark.shuffle.reduceLocality.enabled", "false")
