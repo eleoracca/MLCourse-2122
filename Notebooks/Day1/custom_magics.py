@@ -55,7 +55,7 @@ def sc(num_workers):
     sconf.set("spark.driver.memory", "10g")
     sconf.set("spark.executor.memory", "10g")
     sconf.set("spark.executor.cores", "5") # magic number to achieve maximum HDFS throughtput 
-    sconf.set("spark.kubernetes.container.image.pullPolicy", "Always")
+    #sconf.set("spark.kubernetes.container.image.pullPolicy", "Always")
     
     # for spark-tensorflow?
     #    sconf.set("spark.task.cpus", num_workers)
@@ -102,9 +102,9 @@ def sc_bigDL(num_workers):
     sconf.set('spark.kubernetes.pyspark.pythonVersion', "3")
     sconf.set("spark.driver.port", 34782)
     sconf.set("spark.executorEnv.HADOOP_USER_NAME", "jovyan")
-    sconf.set("spark.driver.memory", "10g")
-    sconf.set("spark.executor.memory", "10g")
-    sconf.set("spark.kubernetes.container.image.pullPolicy", "Always")
+    sconf.set("spark.driver.memory", "2g")
+    sconf.set("spark.executor.memory", "2g")
+    #sconf.set("spark.kubernetes.container.image.pullPolicy", "Always")
 
     # to land on particular nodes
     #sconf.set("spark.kubernetes.node.selector.kubernetes.io/hostname","t2-mlwn-02.to.infn.it")    
