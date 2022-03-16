@@ -72,15 +72,19 @@ def sc(num_workers):
     return context
 
 # Define the Spark context for bigDL
+# bigDL forces number of cores = 1
+# needs at least 6 GB/executor
+# resources as default spark config - 60 GB memory = 10 (driver)+5x10 (executor) /student , 25 cores
+# try with 7*8 GB (executor) +4 GB (driver) = 60 GB
 
 @register_line_magic
 def sc_bigDL(num_workers):
     
     # set default number of workers
     if not num_workers:
-        num_workers=25
+        num_workers=5
     # ser max number of workers 
-    max_workers=25
+    max_workers=5
     #if int(num_workers) > max_workers:
     #    num_workers=max_workers
         
@@ -102,8 +106,8 @@ def sc_bigDL(num_workers):
     sconf.set('spark.kubernetes.pyspark.pythonVersion', "3")
     sconf.set("spark.driver.port", 34782)
     sconf.set("spark.executorEnv.HADOOP_USER_NAME", "jovyan")
-    sconf.set("spark.driver.memory", "2g")
-    sconf.set("spark.executor.memory", "6g")
+    sconf.set("spark.driver.memory", "4g") #works already with 2
+    sconf.set("spark.executor.memory", "8g") #works already with 6 
     #sconf.set("spark.kubernetes.container.image.pullPolicy", "Always")
 
     # to land on particular nodes
@@ -115,9 +119,18 @@ def sc_bigDL(num_workers):
     sconf.set("spark.executor.extraClassPath","/opt/conda/lib/python3.9/site-packages/bigdl/share/dllib/lib/bigdl-dllib-spark_3.1.2-2.0.0-jar-with-dependencies.jar")
     sconf.set("spark.executor.cores", "1")
     sconf.set("spark.cores.max", "1")
+
+# increasing memoryOverhead reduces errors, but makes it slower    
 #    sconf.set("spark.executor.memoryOverhead", "512m")  
 #    sconf.set("spark.driver.memoryOverhead", "512m")    
-        
+#    sconf.set("spark.kubernetes.memoryOverheadFactor","0.5")
+#    sconf.set("spark.default.parallelism", "250")
+#    sconf.set("spark.sql.shuffle.partitions", "100")
+#    sconf.set("spark.shuffle.io.retryWait", "180s")  
+#    sconf.set("spark.network.timeout", "800s")     
+#    sconf.set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
+#    sconf.set("spark.dynamicAllocation.enabled", "false")
+    
     sconf.set("spark.shuffle.reduceLocality.enabled", "false")
     sconf.set("spark.shuffle.blockTransferService", "nio")
     sconf.set("spark.scheduler.minRegisteredResourcesRatio", "1.0")
