@@ -112,7 +112,7 @@ def sc_bigDL(num_workers):
 
     # to land on particular nodes
     #sconf.set("spark.kubernetes.node.selector.kubernetes.io/hostname","t2-mlwn-02.to.infn.it")    
-    sconf.set("spark.kubernetes.node.selector.cluster", "yoga-priv")
+    #sconf.set("spark.kubernetes.node.selector.cluster", "yoga-priv")
  
     #bigDL
     sconf.set("spark.jars","/opt/conda/lib/python3.9/site-packages/bigdl/share/dllib/lib/bigdl-dllib-spark_3.1.2-2.0.0-jar-with-dependencies.jar")
