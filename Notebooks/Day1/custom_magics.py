@@ -63,7 +63,7 @@ def sc(num_workers):
 
     # to land on particular nodes
     #sconf.set("spark.kubernetes.node.selector.kubernetes.io/hostname","t2-mlwn-02.to.infn.it")    
-    sconf.set("spark.kubernetes.node.selector.cluster", "yoga-priv")
+    #sconf.set("spark.kubernetes.node.selector.cluster", "yoga-priv")
 
     context=SparkContext(conf=sconf)   
     context.setLogLevel("DEBUG")
