@@ -1,0 +1,80 @@
+% Questo è il file di stile di Eleonora Racca per pacchetti matematici e chimici
+% ------------------------ CHIMICA -----------------------
+%\usepackage{chemmacros} % per le formule matematiche, dà problemi con gli alfabeti matematici (?)
+%\chemsetup{modules=all}
+%\usepackage{chemformula} %consigliato dall'Arte LaTeX per le formule chimiche semplici
+%\usepackage{chemfig} %consigliato dall'Arte LaTeX per le strutture molecolari
+
+% ---------------------- MATEMATICA ----------------------
+\usepackage{braket}
+\usepackage{cancel}
+%\usepackage{cool} % for writing many functions easier (see at http://tug.ctan.org/macros/latex/contrib/cool/cool.pdf) conflicts with listlings package
+%\usepackage{helvet} % font suggeriti per siunitx
+%\usepackage{mathpazo} % pazo math fonts, family of PostScript fonts
+%\usepackage{calrsfs} % fonts
+%\DeclareMathAlphabet{\pazocal}{OMS}{zplm}{m}{n}
+%\usepackage{mathrsfs} % for calligraphics maiusc letters, uso: \mathscr{}
+\usepackage{mathtools}
+\usepackage{xfrac} % for writing fractions in different ways
+
+% Teoremi
+\usepackage{amsthm}
+\theoremstyle{plain} 
+\newtheorem{thm}{Teorema}[section] 
+\newtheorem{cor}[thm]{Corollario} 
+\newtheorem{lem}[thm]{Lemma} 
+\newtheorem{prop}[thm]{Proposizione}
+\newtheorem{@thmattr}[thm]{\theorem@attr}
+\newenvironment{thmattr}[1]
+{\def\theorem@attr{#1}\begin{@thmattr}}
+{\end{@thmattr}}
+
+\theoremstyle{definition} 
+\newtheorem{defn}{Definizione}[section]
+\newtheorem{conj}{Congettura}[section]
+\newtheorem{exmp}{Esempio}[section]
+
+\theoremstyle{remark} 
+\newtheorem{oss}{Osservazione}
+%\newtheorem{note}{Nota}
+\newtheorem{caso}{Caso}
+
+\newcommand{\cvd}{C. V. D.}
+
+% Insiemi numerici
+%\renewcommand{\Re}{\mathop{\mathrm{Re}}}
+%\renewcommand{\Im}{\mathop{\mathrm{Im}}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+% Operatori matematici
+\DeclareMathOperator{\sgn}{sgn} %segnante
+\DeclareMathOperator{\res}{Res} %residuo
+\DeclareMathOperator{\esp}{e} %esponenziale
+\DeclareMathOperator{\de}{\mathrm{d}} %differenziale corretto
+\DeclareMathOperator{\tr}{Tr} %traccia di una matrice
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert} %valore assoluto |x|
+\DeclarePairedDelimiter{\norma}{\lVert}{\rVert} %norma ||x||
+\DeclarePairedDelimiter{\media}{\langle}{\rangle} %media <x>
+
+\newcommand{\fdix}{f \left( x \right)} %scrive f(x)
+\newcommand{\gdix}{g \left( x \right)} %scrive g(x)
+\newcommand{\FDIX}[2][x]{#2 \left( #1 \right)} %\FDIX[z]{F} scrive F(z)
+\newcommand{\versore}[1]{{\widehat{#1}}}
+\renewcommand{\hat}{\widehat} %cappello del versore
+\renewcommand{\vec}{\overrightarrow} %freccetta del vettore
+\newcommand{\traccia}[1]{\tr \left[ #1 \right]} %traccia di una matrice con parentesi e tutto
+
+% Funzioni trigonometriche
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccsc}{arccsc}
+\DeclareMathOperator{\arcsinh}{settsenh}
+\DeclareMathOperator{\arccosh}{settcosh}
+\DeclareMathOperator{\arctanh}{setttanh}
+\DeclareMathOperator{\arccoth}{settcoth}
+\DeclareMathOperator{\arcsech}{settsech}
+\DeclareMathOperator{\arccsch}{settcsch}

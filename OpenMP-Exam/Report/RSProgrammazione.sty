@@ -1,0 +1,147 @@
+% Questo è il file di stile di Eleonora Racca per i pacchetti di programmazione
+% ---------------------- PROGRAMMAZIONE ----------------------
+\usepackage{listings}
+\lstset{captionpos=b,
+					basicstyle=\ttfamily\footnotesize,
+					commentstyle=\ttfamily\footnotesize,
+					breaklines=true,
+					extendedchars=true,
+					frame=trBL, frameround=true,
+					showstringspaces=false,
+					numbers=left,
+					numberstyle=\tiny,
+					stepnumber=2,
+					tabsize=2,
+					linewidth=0.9\textwidth,
+					xleftmargin=.1\textwidth,
+					%backgroundcolor=\color{sabbia}
+					%title=File: \lstname
+					}
+					
+\definecolor{c_string}{RGB}{0,0,255}
+\definecolor{c_keyword}{RGB}{160,0,160}
+\definecolor{gray}{RGB}{166,166,166}
+
+\lstdefinestyle{ansi-c}{language=C,
+					showstringspaces=false,
+					basicstyle=\footnotesize\ttfamily,
+					morekeywords={define, include},
+					keywordstyle=\bfseries\color{c_keyword},
+					commentstyle=\color{gray},
+					morecomment=[s][\color{gray}]{/*}{*/},
+					morecomment=[l][\color{c_keyword}]{\#},
+					morecomment=[l][\color{gray}]{//},
+					identifierstyle=\color{black},
+					stringstyle=\color{c_string},
+					morestring=[b][\color{c_string}]",
+					morestring=[d][\color{c_string}]',
+					captionpos=b,
+					basicstyle=\ttfamily\footnotesize,
+					commentstyle=\ttfamily\footnotesize,
+					breaklines=true,
+					extendedchars=true,
+					frame=single,
+					showstringspaces=false,
+					numbers=left,
+					numberstyle=\tiny,
+					stepnumber=2,
+					tabsize=2,
+					title=File: \lstname}
+
+\lstdefinestyle{ansi-c-cut}{language=C,
+					showstringspaces=false,
+					basicstyle=\footnotesize\ttfamily,
+					morekeywords={define, include},
+					keywordstyle=\bfseries\color{c_keyword},
+					commentstyle=\color{gray},
+					morecomment=[s][\color{gray}]{/*}{*/},
+					morecomment=[l][\color{c_keyword}]{\#},
+					morecomment=[l][\color{gray}]{//},
+					identifierstyle=\color{black},
+					stringstyle=\color{c_string},
+					morestring=[b][\color{c_string}]",
+					morestring=[d][\color{c_string}]',
+					%captionpos=b,
+					%basicstyle=\ttfamily\footnotesize,
+					%commentstyle=\ttfamily\footnotesize,
+					%breaklines=true,
+					%extendedchars=true,
+					%frame=single,
+					%showstringspaces=false,
+					%numbers=left,
+					%numberstyle=\tiny,
+					%stepnumber=2,
+					%tabsize=2,
+					title={\   }}%=File: \lstname}
+
+\newcommand{\sourcecode}[3][C]{\lstinputlisting[language=#1]{#2}}
+\newcommand{\ccode}[1]{\lstinputlisting[language=C, style=ansi-c]{#1}}
+\newcommand{\cutccode}[2]{\lstinputlisting[language=C, style=ansi-c-cut, #1]{#2}}
+% example: \cutccode{firstline=6,lastline=46}{es7/main.c}
+%\newcommand{\bash}[1]{\lstinputlisting[language=bash, style=bash]{#1}}
+
+% Python style for highlighting
+%\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
+%\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
+
+\newcommand\pythonstyle{\lstset{
+	language=Python,
+	basicstyle=\ttfamily\footnotesize,
+	commentstyle=\ttfamily\footnotesize,
+	%morekeywords={self},              % Add keywords here
+	keywordstyle=\bfseries\color{deepblue}\footnotesize,
+	emph={MyClass,__init__},          % Custom highlighting
+	emphstyle=\bfseries\color{deepred},    % Custom highlighting style
+	stringstyle=\color{deepgreen},
+	breaklines=true,
+	extendedchars=true,
+	frame=trBL, frameround=true,
+	showstringspaces=false,
+	numbers=left,
+	numberstyle=\tiny,
+	stepnumber=2,
+	tabsize=2,
+	linewidth=0.9\textwidth,
+	xleftmargin=.1\textwidth,
+	backgroundcolor=\color{sabbia}
+}}
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+\lstdefinestyle{outputstyle}{
+	basicstyle=\ttfamily\footnotesize,
+	commentstyle=\ttfamily\footnotesize,
+	breaklines=true,
+	extendedchars=true,
+	frame=trBL, frameround=true,
+	showstringspaces=false,
+	linewidth=0.9\textwidth,
+	xleftmargin=.1\textwidth,
+	backgroundcolor=\color{cenere}
+}
+
+\lstdefinestyle{errorstyle}{
+	basicstyle=\color{red}\ttfamily\footnotesize,
+	commentstyle=\ttfamily\footnotesize,
+	breaklines=true,
+	extendedchars=true,
+	frame=trBL, frameround=true,
+	showstringspaces=false,
+	linewidth=0.9\textwidth,
+	xleftmargin=.1\textwidth,
+	backgroundcolor=\color{cenere}
+}
