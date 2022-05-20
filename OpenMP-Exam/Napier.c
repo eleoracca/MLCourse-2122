@@ -41,7 +41,7 @@ int main(){
 	}
 	
 	// comparison between for loop divided by the user and the pragma for
-	//range(max, n_max);
+	range(max, n_max);
 	forsimple(max, n_max);
 	
 	// assessing the race conditions
@@ -107,7 +107,7 @@ void range(int max, int n_max){
 			
 			thread_id = omp_get_thread_num();
 			
-			for(int i = thread_id; i < n_max; i + j){
+			for(int i = thread_id; i < n_max; i += j){
 				e[thread_id] += 1.0/factorial(i+1);
 			}
 		
