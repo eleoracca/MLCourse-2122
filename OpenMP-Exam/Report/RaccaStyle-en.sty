@@ -38,11 +38,6 @@
 \fancyhead[LE]{\slshape \leftmark}
 \fancyhead[RO]{\slshape \rightmark}
 \fancyfoot[CE, CO]{\thepage}
-\usepackage{titlesec} %per modificare il formato del titolo di capitoli, sezioni ecc
-\titleformat{\chapter}[hang]{\Huge \bfseries}{\thechapter \hspace{7pt} \textcolor{grigio75}{|}}{10pt}{\Huge \bfseries}
-\titleformat{\section}[hang]{\LARGE \bfseries}{\thesection}{10pt}{\LARGE \bfseries}
-\titleformat{\subsection}[hang]{\Large \bfseries}{\thesubsection}{10pt}{\Large \bfseries}
-\titleformat{\subsubsection}[hang]{\large \bfseries}{}{5pt}{\large \bfseries}
 
 % Figure e tabelle
 \usepackage{caption}
@@ -53,10 +48,10 @@
 \usepackage{multirow}
 \usepackage{subfigure}
 %\usepackage{tabularx}
-\renewcommand{\thetable}{\arabic{chapter}.\arabic{table}}
-\renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}}
+%\renewcommand{\thetable}{\arabic{section}.\arabic{table}}
+%\renewcommand{\thefigure}{\arabic{section}.\arabic{figure}}
 %\renewcommand{\thesubtable}{\alph{subtable}}
-\renewcommand{\thesubfigure}{\alph{subfigure}}
+%\renewcommand{\thesubfigure}{\alph{subfigure}}
 \captionsetup[figure]{textfont=sl, singlelinecheck=on, justification=raggedright, labelformat=simple, labelsep=colon, labelfont={bf,it}}
 \captionsetup[table]{textfont=sl, singlelinecheck=on, justification=raggedright, labelformat=simple, labelsep=colon, labelfont={bf,it}}
 \captionsetup[subfigure]{textfont=it, singlelinecheck=off, justification=raggedright, labelformat=parens, labelsep=colon}
